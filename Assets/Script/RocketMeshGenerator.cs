@@ -8,21 +8,21 @@ public class RocketMeshGenerator : MonoBehaviour
 
     Parameters param;
 
+    PolygonCollider2D polyCollider;
+
     Vector3[] vertices;
     int[] traingles;
     void Start()
     {
         mesh = new Mesh();
+        polyCollider = gameObject.AddComponent<PolygonCollider2D>();
+        polyCollider.pathCount = 4;
         GetComponent<MeshFilter>().mesh = mesh;
 
         param = GetComponent<Parameters>();
 
         CalculateMeshInfo();
-    }
 
-    void Update()
-    {
-        UpdateMeshInfo();
     }
 
     public void CalculateMeshInfo()
@@ -90,6 +90,8 @@ public class RocketMeshGenerator : MonoBehaviour
             16,19,17,
             17,19,18,
         };
+
+        UpdateMeshInfo();
     }
 
     void UpdateMeshInfo()
@@ -98,5 +100,20 @@ public class RocketMeshGenerator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = traingles;
+
+        UpdateColliderInfo();
+    }
+
+    public void UpdateColliderInfo()
+    {
+        Vector2[] path1 = { vertices[0], vertices[1], vertices[2], vertices[3], vertices[4] };
+        Vector2[] path2 = { vertices[5], vertices[6], vertices[7], vertices[8], vertices[9] };
+        Vector2[] path3 = { vertices[10], vertices[11], vertices[12], vertices[13], vertices[14] };
+        Vector2[] path4 = { vertices[15], vertices[16], vertices[17], vertices[18], vertices[19] };
+        polyCollider.SetPath(0, path1);
+        polyCollider.SetPath(1, path2);
+        polyCollider.SetPath(2, path3);
+        polyCollider.SetPath(3, path4);
+
     }
 }
