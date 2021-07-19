@@ -7,31 +7,36 @@ public class ParticleEmitterShapeModifier : MonoBehaviour
     Parameters param;
     ParticleSystemInfoScript psInfo;
 
+    public float maxEmmision;
+
     private void Start()
     {
         param = GetComponent<Parameters>();
         psInfo = GetComponent<ParticleSystemInfoScript>();
-
-        SetEmittersShape();
     }
 
     public void SetEmittersShape()
     {
         ParticleSystemInfoScript.emitterData emitter1Data = psInfo.getEmitter1();
+        ParticleSystemInfoScript.emitterData emitter2Data = psInfo.getEmitter2();
+        ParticleSystemInfoScript.emitterData emitter3Data = psInfo.getEmitter3();
 
         ChangeShapeByEmitterType(emitter1Data);
+        ChangeShapeByEmitterType(emitter2Data);
+        ChangeShapeByEmitterType(emitter3Data);
 
     }
 
     public void ChangeShapeByEmitterType( ParticleSystemInfoScript.emitterData emData )
     {
-        float pos = 0, area = 0;
+        float pos = 0, area = 0, areaNrm = 0;
 
         switch(emData.emitterPos)
         {
             case ParticleSystemInfoScript.EmitterPos.Top: {
                     pos = param.getAreaCenter() / 2 + param.getAreaConcentric() + param.getDirVector().y + param.getAreaOther() / 2.0f;
                     area = param.getAreaOther();
+                    areaNrm = param.parameters.areaOther;
                 }
                 break;
 
@@ -39,6 +44,7 @@ public class ParticleEmitterShapeModifier : MonoBehaviour
                 {
                     pos = 0;
                     area = param.getAreaCenter();
+                    areaNrm = param.parameters.areaCenter;
                 }
                 break;
 
@@ -46,19 +52,22 @@ public class ParticleEmitterShapeModifier : MonoBehaviour
                 {
                     pos = -(param.getAreaCenter() / 2 + param.getAreaConcentric() + param.getDirVector().y + param.getAreaOther() / 2.0f);
                     area = param.getAreaOther();
+                    areaNrm = param.parameters.areaOther;
                 }
                 break;
         }
 
-        CalculateEmitterShape(emData.emitter, area, pos);
+        CalculateEmitterShape(emData.emitter, area, pos, areaNrm);
     }
 
-    private void CalculateEmitterShape(GameObject psObject, float area, float pos)
+    private void CalculateEmitterShape(GameObject psObject, float area, float pos, float areaNrm)
     {
         Vector2 origPos = psObject.transform.position;
         psObject.transform.position = new Vector2(origPos.x, pos);
         ParticleSystem ps = psObject.GetComponent<ParticleSystem>();
         ParticleSystem.ShapeModule sh = ps.shape;
         sh.radius = area / 2;
+        ParticleSystem.EmissionModule em = ps.emission;
+        em.rateOverTime = Mathf.Lerp(0, maxEmmision, areaNrm);
     }
 }

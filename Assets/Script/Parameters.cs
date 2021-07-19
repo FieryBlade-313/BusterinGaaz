@@ -3,7 +3,7 @@
 public class Parameters : MonoBehaviour
 {
 
-    Vector2 dir;
+    Vector2 dir = Vector2.zero;
     [System.Serializable]
     public struct Params
     {
@@ -90,11 +90,6 @@ public class Parameters : MonoBehaviour
     {
         return parameters.areaConcentric * parameters.areaScale;
     }
-
-    /*public float getTotalLength()
-    {
-        return parameters.length + Mathf.Clamp( (getAngle() != 0.0f) ? getAreaConcentric() / Mathf.Tan( getAngle() * Mathf.Deg2Rad ) : parameters.maxLength , 0, parameters.maxLength );
-    }*/
 
     public Params parameters;
 

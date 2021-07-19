@@ -15,8 +15,8 @@ public class RocketMeshGenerator : MonoBehaviour
     void Start()
     {
         mesh = new Mesh();
-        polyCollider = gameObject.AddComponent<PolygonCollider2D>();
-        polyCollider.pathCount = 4;
+        //polyCollider = gameObject.AddComponent<PolygonCollider2D>();
+        //polyCollider.pathCount = 4;
         GetComponent<MeshFilter>().mesh = mesh;
 
         param = GetComponent<Parameters>();
@@ -25,32 +25,17 @@ public class RocketMeshGenerator : MonoBehaviour
 
     }
 
+    public Vector3 getVertex(int index)
+    {
+        return vertices[index];
+    }
+
     public void CalculateMeshInfo()
     {
         Vector2 dir = param.getDirVector();
 
         vertices = new Vector3[]
         {
-            /*new Vector3(0, param.getAreaCenter()/2, 0),
-            new Vector3(0, 2 * param.getAreaConcentric(), 0),
-            new Vector3(param.getLength(), 2 * param.getAreaConcentric(), 0),
-            new Vector3(param.getTotalLength(), param.getAreaConcentric(), 0),
-            new Vector3(param.getTotalLength(), param.getAreaCenter()/2, 0),
-            new Vector3(0, 2 * param.getAreaConcentric() + param.getAreaOther(), 0),
-            new Vector3(0, 2 * param.getAreaConcentric() + param.getAreaOther() + param.getWidth(), 0),
-            new Vector3(param.getTotalLength(), 2 * param.getAreaConcentric() + param.getAreaOther() + param.getWidth(), 0),
-            new Vector3(param.getTotalLength(), param.getAreaConcentric() + param.getAreaOther(), 0),
-            new Vector3(param.getLength(), 2 * param.getAreaConcentric() + param.getAreaOther(), 0),
-            new Vector3(0, -(param.getAreaCenter()/2), 0),
-            new Vector3(0, -(2 * param.getAreaConcentric()), 0),
-            new Vector3(param.getLength(), -(2 * param.getAreaConcentric()), 0),
-            new Vector3(param.getTotalLength(), -(param.getAreaConcentric()), 0),
-            new Vector3(param.getTotalLength(), -(param.getAreaCenter()/2), 0),
-            new Vector3(0, -(2 * param.getAreaConcentric() + param.getAreaOther()), 0),
-            new Vector3(0, -(2 * param.getAreaConcentric() + param.getAreaOther() + param.getWidth()), 0),
-            new Vector3(param.getTotalLength(), -(2 * param.getAreaConcentric() + param.getAreaOther() + param.getWidth()), 0),
-            new Vector3(param.getTotalLength(), -(param.getAreaConcentric() + param.getAreaOther()), 0),
-            new Vector3(param.getLength(), -(2 * param.getAreaConcentric() + param.getAreaOther()), 0)*/
             new Vector3(0, param.getAreaCenter()/2, 0),
             new Vector3(0, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y, 0),
             new Vector3(param.getLength()-dir.x, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y, 0),
@@ -101,7 +86,7 @@ public class RocketMeshGenerator : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = traingles;
 
-        UpdateColliderInfo();
+        //UpdateColliderInfo();
     }
 
     public void UpdateColliderInfo()
