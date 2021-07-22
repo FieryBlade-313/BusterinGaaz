@@ -18,6 +18,8 @@ public class SliderHandler : MonoBehaviour
     public InputField areaConcentricInputField;
     public InputField areaOtherInputField;
 
+    public FireController fc;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class SliderHandler : MonoBehaviour
         GetComponent<RocketMeshGenerator>().CalculateMeshInfo();
         GetComponent<ParticleEmitterShapeModifier>().SetEmittersShape();
         GetComponent<TriggerColliderSetter>().InitializeParticleDirection();
+        fc.SetFireOffset();
+        fc.DebugLengthSetter();
 
     }
 }

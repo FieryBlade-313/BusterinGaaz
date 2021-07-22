@@ -11,6 +11,7 @@ public class RocketMeshGenerator : MonoBehaviour
     PolygonCollider2D polyCollider;
 
     Vector3[] vertices;
+    Vector2[] uvs;
     int[] traingles;
     void Start()
     {
@@ -23,6 +24,14 @@ public class RocketMeshGenerator : MonoBehaviour
 
         CalculateMeshInfo();
 
+    }
+
+    public float getIntersectionDistance()
+    {
+        if (param.getAngle() < 0.5f)
+            return param.parameters.maxIntersectionLength;
+        float dist = vertices[2].x + (param.getAreaCenter() / 2 + param.getAreaConcentric() + param.getDirVector().y + param.getAreaOther() / 2.0f) * Mathf.Tan(Mathf.PI/2-param.getAngle(true));
+        return dist < (param.parameters.maxIntersectionLength ) ? dist : param.parameters.maxIntersectionLength;
     }
 
     public Vector3 getVertex(int index)
@@ -38,13 +47,13 @@ public class RocketMeshGenerator : MonoBehaviour
         {
             new Vector3(0, param.getAreaCenter()/2, 0),
             new Vector3(0, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y, 0),
-            new Vector3(param.getLength()-dir.x, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y, 0),
+            new Vector3(param.getLength() - dir.x, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y, 0),
             new Vector3(param.getLength(), param.getAreaCenter()/2 + param.getAreaConcentric(), 0),
             new Vector3(param.getLength(), param.getAreaCenter()/2, 0),
             new Vector3(0, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther(), 0),
             new Vector3(0, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther() + param.getWidth(), 0),
             new Vector3(param.getLength() + param.getAreaOther() * dir.y + param.getExtraLength(), param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther() + param.getWidth(), 0),
-            new Vector3(param.getLength() + param.getAreaOther() * dir.y, param.getAreaCenter()/2 + param.getAreaConcentric() + param.getAreaOther() * dir.x, 0),
+            new Vector3(param.getLength() + param.getAreaOther() * dir.y, param.getAreaCenter()/2 + param.getAreaConcentric() + param.getAreaOther(), 0),
             new Vector3(param.getLength() - dir.x + param.getAreaOther() * dir.y, param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther(), 0),
 
             new Vector3(0, -param.getAreaCenter()/2, 0),
@@ -55,10 +64,26 @@ public class RocketMeshGenerator : MonoBehaviour
             new Vector3(0, -(param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther()), 0),
             new Vector3(0, -(param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther() + param.getWidth()), 0),
             new Vector3(param.getLength() + param.getAreaOther() * dir.y + param.getExtraLength(), -(param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther() + param.getWidth()), 0),
-            new Vector3(param.getLength() + param.getAreaOther() * dir.y, -(param.getAreaCenter()/2 + param.getAreaConcentric() + param.getAreaOther() * dir.x), 0),
+            new Vector3(param.getLength() + param.getAreaOther() * dir.y, -(param.getAreaCenter()/2 + param.getAreaConcentric() + param.getAreaOther()), 0),
             new Vector3(param.getLength() - dir.x + param.getAreaOther() * dir.y, -(param.getAreaCenter()/2 + param.getAreaConcentric() + dir.y + param.getAreaOther()), 0),
 
         };
+
+        uvs = new Vector2[vertices.Length];
+
+        for (int i = 0; i < vertices.Length; i++)
+            uvs[i] = Vector2.zero;
+
+        uvs[3] = new Vector2(1, 0.5f);
+        uvs[4] = new Vector2(1, 0);
+        uvs[13] = new Vector2(1, 0.5f);
+        uvs[14] = new Vector2(1, 0);
+
+        uvs[7] = new Vector2(1, 1);
+        uvs[8] = new Vector2(1, 0.51f);
+        uvs[17] = new Vector2(1, 1);
+        uvs[18] = new Vector2(1, 0.51f);
+
 
         traingles = new int[]
         {
@@ -85,6 +110,8 @@ public class RocketMeshGenerator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = traingles;
+
+        mesh.uv = uvs;
 
         //UpdateColliderInfo();
     }

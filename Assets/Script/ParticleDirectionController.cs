@@ -32,7 +32,9 @@ public class ParticleDirectionController : MonoBehaviour
             case TriggerType.Top:
                 {
                     psInfo.SetCollider1(polyCollider);
-                }break;
+                    psInfo.SetCollider2(polyCollider);
+                }
+                break;
             case TriggerType.Bottom:
                 {
                     psInfo.SetCollider3(polyCollider);
@@ -46,11 +48,13 @@ public class ParticleDirectionController : MonoBehaviour
     public void SetTriggerDimension()
     {
         Vector2 dir = param.getDirVector();
+        float dist = rmg.getIntersectionDistance();
+        dist = dist > rmg.getVertex(8).x ? dist : rmg.getVertex(8).x;
         switch (triggerType)
         {
             case TriggerType.Top: 
                 {
-                    Vector2[] path = { rmg.getVertex(2), rmg.getVertex(9), rmg.getVertex(19), rmg.getVertex(12) };
+                    Vector2[] path = { rmg.getVertex(2), rmg.getVertex(9), new Vector2(dist, rmg.getVertex(9).y), new Vector2(dist, rmg.getVertex(19).y), rmg.getVertex(19), rmg.getVertex(12) };
                     polyCollider.SetPath(0, path );
                     velDir = new Vector2(dir.y, dir.x);
                 }
@@ -58,7 +62,7 @@ public class ParticleDirectionController : MonoBehaviour
 
             case TriggerType.Bottom:
                 {
-                    Vector2[] path = { rmg.getVertex(2), rmg.getVertex(9), rmg.getVertex(19), rmg.getVertex(12) };
+                    Vector2[] path = { rmg.getVertex(2), rmg.getVertex(9), new Vector2(dist, rmg.getVertex(9).y), new Vector2(dist, rmg.getVertex(19).y), rmg.getVertex(19), rmg.getVertex(12) };
                     polyCollider.SetPath(0, path);
                     velDir = new Vector2(-dir.y, dir.x);
                 }

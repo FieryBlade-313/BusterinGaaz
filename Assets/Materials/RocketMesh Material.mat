@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RocketMesh Material
+  m_Shader: {fileID: -6465566751694194690, guid: 74310a7ee3f10c6499ebb7983be2179c,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_CB6718A:
+        m_Texture: {fileID: 2800000, guid: efa2acbdcb39e7c478f12d3d023ce001, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _temp1_Texture:
+        m_Texture: {fileID: 2800000, guid: 16858433c2de80547a585c2e287ed045, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _temp2_Texture:
+        m_Texture: {fileID: 2800000, guid: 9bd626a823256cf43bc5dd3959e4abaa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _width: 0.08
+    m_Colors:
+    - _bodyColor: {r: 0.02830189, g: 0.02830189, b: 0.02830189, a: 0}
+    - _color1: {r: 0.8505384, g: 0.09184891, b: 0.036107745, a: 0}
+    - _color2: {r: 0.040850844, g: 0.2751424, b: 0.509434, a: 0}

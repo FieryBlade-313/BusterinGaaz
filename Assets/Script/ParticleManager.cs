@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    public ParticleDirectionController targetControllerScript;
+    public ParticleDirectionController targetControllerScript = null;
     private void OnParticleTrigger()
     {
-        ParticleSystem ps = GetComponent<ParticleSystem>();
-        List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
-
-        int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
-
-        for (int i = 0; i < numEnter; i++)
+        if(targetControllerScript != null)
         {
-            ParticleSystem.Particle p = enter[i];
-            p.velocity = targetControllerScript.getDirection() * p.velocity.magnitude;
-            enter[i] = p;
-        }
+            ParticleSystem ps = GetComponent<ParticleSystem>();
+            List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
 
-        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+            int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+
+            for (int i = 0; i < numEnter; i++)
+            {
+                ParticleSystem.Particle p = enter[i];
+                p.velocity = targetControllerScript.getDirection() * p.velocity.magnitude;
+                enter[i] = p;
+            }
+
+            ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+        }
     }
 }
