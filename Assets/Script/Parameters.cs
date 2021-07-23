@@ -24,9 +24,6 @@ public class Parameters : MonoBehaviour
         public float width;
         public float extraLength;
         public float maxIntersectionLength;
-
-        [Range(0, 1)]
-        public float Xcc;
     };
 
     void setDirVector()

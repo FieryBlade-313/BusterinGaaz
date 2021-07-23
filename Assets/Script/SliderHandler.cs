@@ -39,7 +39,6 @@ public class SliderHandler : MonoBehaviour
         GetComponent<ParticleEmitterShapeModifier>().SetEmittersShape();
         GetComponent<TriggerColliderSetter>().InitializeParticleDirection();
         fc.SetFireOffset();
-        fc.DebugLengthSetter();
 
     }
 }
