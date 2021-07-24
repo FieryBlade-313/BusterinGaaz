@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TemperatureController : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class TemperatureController : MonoBehaviour
     private Material tempMaterial;
 
     private Parameters param;
+
+    public Text tf_max_text;
+    public Text tt_max_text;
     private void Start()
     {
         param = FindObjectOfType<Parameters>();
@@ -44,5 +48,10 @@ public class TemperatureController : MonoBehaviour
     {
         tempMaterial.SetColor("_color1", tempGradient.Evaluate(Tfmax));
         tempMaterial.SetColor("_color2", tempGradient.Evaluate(TTmax));
+
+        tf_max_text.text = Tfmax.ToString();
+        tt_max_text.text = TTmax.ToString();
+        tf_max_text.color = tempGradient.Evaluate(Tfmax);
+        tt_max_text.color = tempGradient.Evaluate(TTmax);
     }
 }

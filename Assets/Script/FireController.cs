@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FireController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class FireController : MonoBehaviour
     public RocketMeshGenerator rmg;
 
     private Parameters param;
+    public Text xcc_text;
 
     private void Start()
     {
@@ -38,5 +40,6 @@ public class FireController : MonoBehaviour
     public void SetFireLength(float Xcc)
     {
         transform.parent.localScale = new Vector3(Mathf.Lerp(0.5f * 1f, 1f, Xcc), Mathf.Lerp(0.25f * maxFireLength, maxFireLength, Xcc), 1);
+        xcc_text.text = Xcc.ToString();
     }
 }
