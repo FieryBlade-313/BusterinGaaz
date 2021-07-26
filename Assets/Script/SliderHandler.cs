@@ -25,10 +25,10 @@ public class SliderHandler : MonoBehaviour
     void Start()
     {
         param = GetComponent<Parameters>();
-        angleSlider.value = param.parameters.angle;
-        areaCenterSlider.value = param.parameters.areaCenter;
-        areaConcentricSlider.value = param.parameters.areaConcentric;
-        areaOtherSlider.value = param.parameters.areaOther;
+        angleSlider.value = (float)param.parameters.angle;
+        areaCenterSlider.value = (float)param.parameters.areaCenter;
+        areaConcentricSlider.value = (float)param.parameters.areaConcentric;
+        areaOtherSlider.value = (float)param.parameters.areaOther;
 
         angleInputField.text = param.parameters.angle.ToString();
         areaCenterInputField.text = param.parameters.areaCenter.ToString();

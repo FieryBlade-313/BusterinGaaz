@@ -36,7 +36,7 @@ public class ParticleEmitterShapeModifier : MonoBehaviour
             case ParticleSystemInfoScript.EmitterPos.Top: {
                     pos = param.getAreaCenter() / 2 + param.getAreaConcentric() + param.getDirVector().y + param.getAreaOther() / 2.0f;
                     area = param.getAreaOther();
-                    areaNrm = param.parameters.areaOther;
+                    areaNrm = (float)param.parameters.areaOther;
                 }
                 break;
 
@@ -44,7 +44,7 @@ public class ParticleEmitterShapeModifier : MonoBehaviour
                 {
                     pos = 0;
                     area = param.getAreaCenter();
-                    areaNrm = param.parameters.areaCenter;
+                    areaNrm = (float)param.parameters.areaCenter;
                 }
                 break;
 
@@ -52,7 +52,7 @@ public class ParticleEmitterShapeModifier : MonoBehaviour
                 {
                     pos = -(param.getAreaCenter() / 2 + param.getAreaConcentric() + param.getDirVector().y + param.getAreaOther() / 2.0f);
                     area = param.getAreaOther();
-                    areaNrm = param.parameters.areaOther;
+                    areaNrm = (float)param.parameters.areaOther;
                 }
                 break;
         }

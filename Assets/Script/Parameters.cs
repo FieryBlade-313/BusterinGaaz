@@ -8,22 +8,22 @@ public class Parameters : MonoBehaviour
     public struct Params
     {
         [Range(0,1)]
-        public float angle;
+        public double angle;
         [Range(0, 1)]
-        public float areaCenter;
+        public double areaCenter;
         [Range(0, 1)]
-        public float areaOther;
+        public double areaOther;
         [Range(0, 1)]
-        public float areaConcentric;
+        public double areaConcentric;
 
-        public float angleScale;
-        public float areaScale;
+        public double angleScale;
+        public double areaScale;
 
-        public float maxLength;
-        public float length;
-        public float width;
-        public float extraLength;
-        public float maxIntersectionLength;
+        public double maxLength;
+        public double length;
+        public double width;
+        public double extraLength;
+        public double maxIntersectionLength;
     };
 
     void setDirVector()
@@ -59,37 +59,37 @@ public class Parameters : MonoBehaviour
 
     public float getAngle(bool radians = false)
     {
-        return parameters.angle * parameters.angleScale * ( radians ? Mathf.Deg2Rad : 1 );
+        return (float)(parameters.angle * parameters.angleScale * ( radians ? Mathf.Deg2Rad : 1 ));
     }
 
     public float getLength()
     {
-        return parameters.length;
+        return (float)parameters.length;
     }
 
     public float getWidth()
     {
-        return parameters.width;
+        return (float)parameters.width;
     }
 
     public float getExtraLength()
     {
-        return parameters.extraLength;
+        return (float)(parameters.extraLength);
     }
 
     public float getAreaCenter()
     {
-        return parameters.areaCenter * parameters.areaScale;
+        return (float)(parameters.areaCenter * parameters.areaScale);
     }
 
     public float getAreaOther()
     {
-        return parameters.areaOther * parameters.areaScale;
+        return (float)(parameters.areaOther * parameters.areaScale);
     }
 
     public float getAreaConcentric()
     {
-        return parameters.areaConcentric * parameters.areaScale;
+        return (float)(parameters.areaConcentric * parameters.areaScale);
     }
 
     public Params parameters;

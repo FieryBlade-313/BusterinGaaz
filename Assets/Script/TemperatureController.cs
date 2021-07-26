@@ -19,24 +19,24 @@ public class TemperatureController : MonoBehaviour
         CalculateTemperature();
     }
 
-    float getInjectorFaceHeatCap()
+    double getInjectorFaceHeatCap()
     {
         Parameters.Params parameters = param.parameters;
-        return 0.692f + (0.477f * parameters.angle) - (0.687f * parameters.areaOther) - (0.080f * parameters.areaCenter) - (0.0650f * parameters.areaConcentric) - (0.167f * parameters.angle * parameters.angle)
-                - (0.0129f * parameters.areaOther * parameters.angle) + (0.0796f * parameters.areaOther * parameters.areaOther) - (0.0634f * parameters.areaCenter * parameters.angle) - (0.0257f * parameters.areaCenter * parameters.areaOther)
-                + (0.0877f * parameters.areaCenter * parameters.areaCenter) - (0.0521f * parameters.areaConcentric * parameters.angle) + (0.00156f * parameters.areaConcentric * parameters.areaOther) + (0.00198f * parameters.areaConcentric * parameters.areaCenter)
-                + (0.0184f * parameters.areaConcentric * parameters.areaConcentric);
+        return 0.692 + (0.477 * parameters.angle) - (0.687 * parameters.areaOther) - (0.080 * parameters.areaCenter) - (0.0650 * parameters.areaConcentric) - (0.167 * parameters.angle * parameters.angle)
+                - (0.0129 * parameters.areaOther * parameters.angle) + (0.0796 * parameters.areaOther * parameters.areaOther) - (0.0634 * parameters.areaCenter * parameters.angle) - (0.0257 * parameters.areaCenter * parameters.areaOther)
+                + (0.0877 * parameters.areaCenter * parameters.areaCenter) - (0.0521 * parameters.areaConcentric * parameters.angle) + (0.00156 * parameters.areaConcentric * parameters.areaOther) + (0.00198 * parameters.areaConcentric * parameters.areaCenter)
+                + (0.0184 * parameters.areaConcentric * parameters.areaConcentric);
     }
 
-    float getPostTipHeatCap()
+    double getPostTipHeatCap()
     {
         Parameters.Params parameters = param.parameters;
-        return 0.370f - (0.205f * parameters.angle) + (0.0307f * parameters.areaOther) + (0.108f * parameters.areaCenter) + (1.019f * parameters.areaConcentric)
-                - (0.135f * parameters.angle * parameters.angle) + (0.0141f * parameters.areaOther * parameters.angle) + (0.0998f * parameters.areaOther * parameters.areaOther) + (0.208f * parameters.areaCenter * parameters.angle)
-                - (0.0301f * parameters.areaCenter * parameters.areaOther) - (0.226f * parameters.areaCenter * parameters.areaCenter) + (0.353f * parameters.areaConcentric * parameters.angle) - (0.0497f * parameters.areaConcentric * parameters.areaCenter)
-                - (0.423f * parameters.areaConcentric * parameters.areaConcentric) + (0.202f * parameters.areaOther * parameters.angle * parameters.angle) - (0.281f * parameters.areaCenter * parameters.angle * parameters.angle)
-                - (0.342f * parameters.areaOther * parameters.areaOther * parameters.angle) - (0.245f * parameters.areaOther * parameters.areaOther * parameters.areaCenter) + (0.281f * parameters.areaCenter * parameters.areaCenter * parameters.areaOther)
-                - (0.184f * parameters.areaConcentric * parameters.areaConcentric * parameters.angle) - (0.281f * parameters.areaOther * parameters.angle * parameters.areaCenter);
+        return 0.370 - (0.205 * parameters.angle) + (0.0307 * parameters.areaOther) + (0.108 * parameters.areaCenter) + (1.019 * parameters.areaConcentric)
+                - (0.135 * parameters.angle * parameters.angle) + (0.0141 * parameters.areaOther * parameters.angle) + (0.0998 * parameters.areaOther * parameters.areaOther) + (0.208 * parameters.areaCenter * parameters.angle)
+                - (0.0301 * parameters.areaCenter * parameters.areaOther) - (0.226 * parameters.areaCenter * parameters.areaCenter) + (0.353 * parameters.areaConcentric * parameters.angle) - (0.0497 * parameters.areaConcentric * parameters.areaCenter)
+                - (0.423 * parameters.areaConcentric * parameters.areaConcentric) + (0.202 * parameters.areaOther * parameters.angle * parameters.angle) - (0.281 * parameters.areaCenter * parameters.angle * parameters.angle)
+                - (0.342 * parameters.areaOther * parameters.areaOther * parameters.angle) - (0.245 * parameters.areaOther * parameters.areaOther * parameters.areaCenter) + (0.281 * parameters.areaCenter * parameters.areaCenter * parameters.areaOther)
+                - (0.184 * parameters.areaConcentric * parameters.areaConcentric * parameters.angle) - (0.281 * parameters.areaOther * parameters.angle * parameters.areaCenter);
     }
 
     public void CalculateTemperature()
@@ -44,14 +44,14 @@ public class TemperatureController : MonoBehaviour
         SetMeshTemperature(getInjectorFaceHeatCap(), getPostTipHeatCap());
     }
 
-    public void SetMeshTemperature(float Tfmax,float TTmax)
+    public void SetMeshTemperature(double Tfmax,double TTmax)
     {
-        tempMaterial.SetColor("_color1", tempGradient.Evaluate(Tfmax));
-        tempMaterial.SetColor("_color2", tempGradient.Evaluate(TTmax));
+        tempMaterial.SetColor("_color1", tempGradient.Evaluate((float)Tfmax));
+        tempMaterial.SetColor("_color2", tempGradient.Evaluate((float)TTmax));
 
         tf_max_text.text = Tfmax.ToString();
         tt_max_text.text = TTmax.ToString();
-        tf_max_text.color = tempGradient.Evaluate(Tfmax);
-        tt_max_text.color = tempGradient.Evaluate(TTmax);
+        tf_max_text.color = tempGradient.Evaluate((float)Tfmax);
+        tt_max_text.color = tempGradient.Evaluate((float)TTmax);
     }
 }

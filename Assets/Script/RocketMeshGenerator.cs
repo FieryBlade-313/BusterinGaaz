@@ -29,9 +29,9 @@ public class RocketMeshGenerator : MonoBehaviour
     public float getIntersectionDistance()
     {
         if (param.getAngle() < 0.5f)
-            return param.parameters.maxIntersectionLength;
-        float dist = vertices[2].x + (param.getAreaCenter() / 2 + param.getAreaConcentric() + param.getDirVector().y + param.getAreaOther() / 2.0f) * Mathf.Tan(Mathf.PI/2-param.getAngle(true));
-        return dist < (param.parameters.maxIntersectionLength ) ? dist : param.parameters.maxIntersectionLength;
+            return (float)param.parameters.maxIntersectionLength;
+        double dist = vertices[2].x + (param.getAreaCenter() / 2 + param.getAreaConcentric() + param.getDirVector().y + param.getAreaOther() / 2.0) * Mathf.Tan(Mathf.PI/2-(float)param.getAngle(true));
+        return dist < (param.parameters.maxIntersectionLength ) ? (float)dist : (float)param.parameters.maxIntersectionLength;
     }
 
     public Vector3 getVertex(int index)
